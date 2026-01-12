@@ -22,37 +22,92 @@ function getElement(id){
     return document.getElementById(id);
 }
 
-document.getElementById('card-btn-1').addEventListener("click", function () {
+const cartBtns = document.getElementsByClassName('cart-btn');
+console.log(cartBtns);
 
-    const title = getElement('card-title-1').innerText;
 
-    const price = Number(getElement('card-price-1').innerText);
-
-    const totalprice = Number(getElement('total-price').innerText);
-
-    const currentTotal = price + totalprice;
-
-    getElement('total-price').innerText = currentTotal.toFixed(2);
-
+for(let cartBtn of cartBtns){
+   cartBtn.addEventListener('click',function(){
+    const productImg = cartBtn.parentNode.parentNode.parentNode.childNodes[1].childNodes[1].src;
+ 
+    const productTitle = cartBtn.parentNode.parentNode.children[1].innerText;
+    const productPrice = cartBtn.parentNode.parentNode.children[2].innerText;
+    const totalPrice = getElement("total-price").innerText;
+    const currentPrice = Number(totalPrice) + parseFloat(productPrice);
+    getElement("total-price").innerText = currentPrice.toFixed(2);
     const cartContainer = getElement('cart-container');
-
-const newCart = document.createElement("div");
+    const newCart = document.createElement("div");
+    const quantity = getElement('product-iteam').innerText;
+    const totalQuantity = Number(quantity) + 1;
+    getElement('product-iteam').innerText = totalQuantity;
+   
 
 newCart.innerHTML = `
 
-                  <div class="bg-gray-500 rounded-xl flex justify-between
+                 <div class="bg-gray-500 rounded-xl flex justify-between
                   p-4 mb-5">
-                  <img src="./assets/kitchen-1.png" alt="" class="w-10">
+                  <img src="${productImg}" alt="" class="w-10">
                   <div class="" >
-                    <h2>Product Name</h2>
-                    <p>Price : 39 tk</p>
-                  </div>
-
+                 <h2>${productTitle}</h2>
+                 <p>Price : ${productPrice} tk</p>
+                  <p>Quantity : <span >=${totalQuantity }</span></p>
+                
+                
+                </div>
                   </div>
               
 `;
 cartContainer.append(newCart);
+
+
+
+ 
+
 });
+
+
+}
+
+
+
+
+
+
+
+
+// document.getElementById('card-btn-1').addEventListener("click", function () {
+
+//     const title = getElement('card-title-1').innerText;
+
+//     const price = Number(getElement('card-price-1').innerText);
+
+//     const totalprice = Number(getElement('total-price').innerText);
+
+//     const currentTotal = price + totalprice;
+
+//     getElement('total-price').innerText = currentTotal.toFixed(2);
+
+//     const cartContainer = getElement('cart-container');
+
+// const newCart = document.createElement("div");
+
+// newCart.innerHTML = `
+
+//                   <div class="bg-gray-500 rounded-xl flex justify-between
+//                   p-4 mb-5">
+//                   <img src="./assets/kitchen-1.png" alt="" class="w-10">
+//                   <div class="" >
+//                     <h2>Product Name</h2>
+//                     <p>Price : 39 tk</p>
+
+//                   </div>
+
+//                   </div>
+              
+// `;
+// cartContainer.append(newCart);
+// });
+
 
 
 
