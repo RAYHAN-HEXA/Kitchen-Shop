@@ -69,6 +69,12 @@ cartContainer.append(newCart);
 }
 
 
+document.getElementById('clr-btn').addEventListener('click', function() {
+    const cartContainer = getElement('cart-container');
+    cartContainer.innerHTML = "";
+});
+
+
 
 
 
